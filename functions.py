@@ -1,4 +1,4 @@
-def read_tasks_from_file(filename):
+def lire_taches_fichier(filename):
     tasks = []
     with open(filename, 'r') as file:
         for line in file:
