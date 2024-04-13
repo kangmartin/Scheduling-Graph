@@ -1,3 +1,6 @@
+from prettytable import PrettyTable
+
+
 def lire_taches_fichier(filename):
     tasks = []
     with open(filename, 'r') as file:
@@ -59,3 +62,36 @@ def afficher_graph(tasks):
     for task in tasks:
         if task[0] in tasks_without_successors:
             print(task[0], "->", omega, "=", task[1])
+
+
+def creer_matrice(tasks):
+    # Calculer le nombre total de sommets
+    sommets_count = len(tasks) + 2  # Inclut α et ω
+    omega = sommets_count - 1
+
+    # Initialisation de la matrice avec '*'
+    matrice = [['*' for _ in range(sommets_count)] for _ in range(sommets_count)]
+
+    # Remplir la matrice avec les poids des arcs
+    for task_id, duration, predecessors in tasks:
+        if not predecessors:
+            # Arc depuis α vers la tâche sans prédécesseurs
+            matrice[0][task_id] = 0
+        for pred in predecessors:
+            # Arcs depuis les prédécesseurs vers la tâche actuelle
+            matrice[pred][task_id] = tasks[pred - 1][1]  # duration of the predecessor
+
+    # Ajouter les arcs vers ω
+    all_tasks = set(task[0] for task in tasks)
+    tasks_with_predecessors = set(pred for task in tasks for pred in task[2])
+    tasks_without_successors = all_tasks - tasks_with_predecessors
+    for task_id in tasks_without_successors:
+        matrice[task_id][omega] = tasks[task_id - 1][1]  # duration of the task
+
+    # Utilisation de PrettyTable pour afficher la matrice
+    table = PrettyTable()
+    table.field_names = [" "] + [str(i) for i in range(sommets_count)]
+    for i in range(sommets_count):
+        table.add_row([str(i)] + matrice[i])
+
+    print(table)
