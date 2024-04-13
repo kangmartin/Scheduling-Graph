@@ -1,7 +1,7 @@
 from functions import *
 
-tasks = lire_taches_fichier("FichiersTest/test.txt")
+tasks = lire_taches_fichier("FichiersTest/test2.txt")
 
 print("Contenu des taches:", tasks)
-afficher_graph(tasks)
+afficher_tableau_contraintes(tasks)
 creer_matrice(tasks)
