@@ -1,6 +1,6 @@
 from functions import *
 
-tasks = lire_taches_fichier("FichiersTest/table 2.txt")
+tasks = lire_taches_fichier("FichiersTest/table 1.txt")
 
 print("Contenu des taches:", tasks)
 afficher_tableau_contraintes(tasks)
