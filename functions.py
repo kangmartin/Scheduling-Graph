@@ -45,7 +45,8 @@ def calcul_arc(tasks):
 def afficher_tableau_contraintes(tasks):
     table = PrettyTable()
     table.field_names = ["Tâche", "Durée", "Contraintes"]
-
+    print("Le tableau à", calcul_sommets(tasks), "sommets")
+    print("Le tableau à", calcul_arc(tasks), "arcs")
     for task_id, duration, constraints in tasks:
         # Convertir les contraintes en chaîne de caractères ou laisser vide si pas de contraintes
         constraints_str = ', '.join(str(c) for c in constraints) if constraints else ""
