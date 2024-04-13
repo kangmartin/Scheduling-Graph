@@ -42,26 +42,18 @@ def calcul_arc(tasks):
     return arc_count
 
 
-def afficher_graph(tasks):
-    print("Le fichier à:", calcul_sommets(tasks), "sommets")
-    print("Le fichier à:", calcul_arc(tasks), "arcs")
-    pred = []
-    for i in tasks:
-        pred.append(i[2])
-    for j in range(len(pred)):
-        if len(pred[j]) == 0:
-            print("0 ->", tasks[j][0], "= 0")
-        else:
-            for z in range(len(pred[j])):
-                print(pred[j][z], "->", tasks[j][0], "=", tasks[pred[j][z] - 1][1])
+def afficher_tableau_contraintes(tasks):
+    table = PrettyTable()
+    table.field_names = ["Tâche", "Durée", "Contraintes"]
 
-    all_tasks = set(task[0] for task in tasks)
-    tasks_with_predecessors = set(pred for task in tasks for pred in task[2])
-    tasks_without_successors = all_tasks - tasks_with_predecessors
-    omega = max(all_tasks) + 1
-    for task in tasks:
-        if task[0] in tasks_without_successors:
-            print(task[0], "->", omega, "=", task[1])
+    for task_id, duration, constraints in tasks:
+        # Convertir les contraintes en chaîne de caractères ou laisser vide si pas de contraintes
+        constraints_str = ', '.join(str(c) for c in constraints) if constraints else ""
+        table.add_row([f"Tâche {task_id}", f"{duration}", f"[{constraints_str}]"])
+
+    # Afficher le tableau
+    print("Tableau de contraintes:")
+    print(table)
 
 
 def creer_matrice(tasks):
@@ -89,7 +81,6 @@ def creer_matrice(tasks):
     for task_id in tasks_without_successors:
         matrice[task_id][omega] = tasks[task_id - 1][1]  # duration of the task
 
-    # Utilisation de PrettyTable pour afficher la matrice
     table = PrettyTable()
     table.field_names = [" "] + [str(i) for i in range(sommets_count)]
     for i in range(sommets_count):
