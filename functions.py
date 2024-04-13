@@ -90,7 +90,7 @@ def creer_matrice(tasks):
     print(table)
 
 
-def verifier_proprietes_ordo(tasks):
+def verifier_cycle(tasks):
     from collections import defaultdict, deque
 
     # Construction du graphe
@@ -105,7 +105,7 @@ def verifier_proprietes_ordo(tasks):
     queue = deque([task for task, duration, _ in tasks if in_degree[task] == 0])
     visited_count = 0
 
-    # Suppression des points d'entrée)
+    # Suppression des points d'entrée
     while queue:
         current = queue.popleft()
         visited_count += 1
@@ -122,5 +122,5 @@ def verifier_proprietes_ordo(tasks):
     if any(duration < 0 for _, duration, _ in tasks):
         return False, "Le graphe contient des arcs à valeur négative"
 
-    return True, "Le graphe est valide pour l'ordonnancement"
+    return True, "Le graphe ne contient aucun cycle"
 
