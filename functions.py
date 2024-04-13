@@ -65,6 +65,7 @@ def afficher_graph(tasks):
 
 
 def creer_matrice(tasks):
+    print("Matrice de valeurs: ")
     # Calculer le nombre total de sommets
     sommets_count = len(tasks) + 2  # Inclut α et ω
     omega = sommets_count - 1
