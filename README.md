@@ -1,5 +1,5 @@
-# Théorie des Graphes (Ordonnancement)
-# Scheduling Graph
+# Scheduling Graph (Ordonnancement)
+
 
 ## Description
 Ce projet implique le développement d'un programme en Python pour lire et traiter des tableaux de contraintes, construire et vérifier un graphe d'ordonnancement, et enfin calculer et afficher le calendrier d'exécution des tâches et les chemins critiques.
