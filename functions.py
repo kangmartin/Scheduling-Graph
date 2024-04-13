@@ -88,3 +88,39 @@ def creer_matrice(tasks):
         table.add_row([str(i)] + matrice[i])
 
     print(table)
+
+
+def verifier_proprietes_ordo(tasks):
+    from collections import defaultdict, deque
+
+    # Construction du graphe
+    graph = defaultdict(list)
+    in_degree = defaultdict(int)
+    for task, _, predecessors in tasks:
+        for pred in predecessors:
+            graph[pred].append(task)
+            in_degree[task] += 1
+
+    # Initialisation de la file pour la suppression des points d'entrée
+    queue = deque([task for task, duration, _ in tasks if in_degree[task] == 0])
+    visited_count = 0
+
+    # Suppression des points d'entrée)
+    while queue:
+        current = queue.popleft()
+        visited_count += 1
+        for neighbor in graph[current]:
+            in_degree[neighbor] -= 1
+            if in_degree[neighbor] == 0:
+                queue.append(neighbor)
+
+    # Vérifier l'absence de cycles
+    if visited_count != len(tasks):
+        return False, "Le graphe contient des cycles"
+
+    # Vérifier l'absence d'arcs à valeur négative
+    if any(duration < 0 for _, duration, _ in tasks):
+        return False, "Le graphe contient des arcs à valeur négative"
+
+    return True, "Le graphe est valide pour l'ordonnancement"
+
