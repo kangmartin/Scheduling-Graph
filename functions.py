@@ -1,5 +1,5 @@
 from prettytable import PrettyTable
-
+import collections
 
 def lire_taches_fichier(filename):
     tasks = []
@@ -45,20 +45,19 @@ def calcul_arc(tasks):
 def afficher_tableau_contraintes(tasks):
     table = PrettyTable()
     table.field_names = ["Tâche", "Durée", "Contraintes"]
-    print("Le tableau à", calcul_sommets(tasks), "sommets")
-    print("Le tableau à", calcul_arc(tasks), "arcs")
+    print("Le tableau de contrainte contient:\n-",calcul_sommets(tasks),"sommets","\n-",calcul_arc(tasks),"arcs")
     for task_id, duration, constraints in tasks:
         # Convertir les contraintes en chaîne de caractères ou laisser vide si pas de contraintes
         constraints_str = ', '.join(str(c) for c in constraints) if constraints else ""
         table.add_row([f"Tâche {task_id}", f"{duration}", f"[{constraints_str}]"])
 
     # Afficher le tableau
-    print("Tableau de contraintes:")
+    print("\nTableau de contraintes:")
     print(table)
 
 
 def afficher_matrice(tasks):
-    print("Matrice de valeurs: ")
+    print("\nMatrice de valeurs: ")
     # Calculer le nombre total de sommets
     sommets_count = len(tasks) + 2  # Inclut α et ω
     omega = sommets_count - 1
@@ -89,37 +88,49 @@ def afficher_matrice(tasks):
 
     print(table)
 
+def verifier_cycle(taches):
 
-def verifier_cycle(tasks):
-    from collections import defaultdict, deque
+    # Construction du graphe d'adjacence et du compteur de prédécesseurs
+    graphe = collections.defaultdict(list)
+    predecesseurs = collections.Counter()
 
-    # Construction du graphe
-    graph = defaultdict(list)
-    in_degree = defaultdict(int)
-    for task, _, predecessors in tasks:
-        for pred in predecessors:
-            graph[pred].append(task)
-            in_degree[task] += 1
+    # Initialisation du graphe et du compteur
+    for tache, _, preds in taches:
+        for pred in preds:
+            graphe[pred].append(tache)
+        predecesseurs[tache] += len(preds)
 
-    # Initialisation de la file pour la suppression des points d'entrée
-    queue = deque([task for task, duration, _ in tasks if in_degree[task] == 0])
-    visited_count = 0
+    # Obtenir tous les sommets (tâches)
+    sommets = set(predecesseurs.keys()).union(set(graphe.keys()))
 
-    # Suppression des points d'entrée
-    while queue:
-        current = queue.popleft()
-        visited_count += 1
-        for neighbor in graph[current]:
-            in_degree[neighbor] -= 1
-            if in_degree[neighbor] == 0:
-                queue.append(neighbor)
+    # Initialisation de la file de traitement avec les tâches sans prédécesseur
+    file_traitement = [tache for tache in sommets if predecesseurs[tache] == 0]
+    print(f"Points d’entrée : {' '.join(map(str, file_traitement)) if file_traitement else 'Aucun'}")
 
-    # Vérifier l'absence de cycles
-    if visited_count != len(tasks):
-        return False, "Le graphe contient des cycles"
+    traitees = 0
 
-    # Vérifier l'absence d'arcs à valeur négative
-    if any(duration < 0 for _, duration, _ in tasks):
-        return False, "Le graphe contient des arcs à valeur négative"
+    # Processus de suppression des points d'entrée (tâches sans prédécesseurs)
+    while file_traitement:
+        print("Suppression des points d’entrée")
+        next_file = []
+        while file_traitement:
+            tache = file_traitement.pop(0)
+            traitees += 1
+            for suivant in graphe[tache]:
+                predecesseurs[suivant] -= 1
+                if predecesseurs[suivant] == 0:
+                    next_file.append(suivant)
 
-    return True, "Le graphe ne contient aucun cycle"
+        file_traitement = next_file
+        restants = set(sommets) - set(tache for tache, count in predecesseurs.items() if count == 0)
+        print(f"Sommets restant : {' '.join(map(str, restants)) if restants else 'Aucun'}")
+        if file_traitement:
+            print(f"Points d’entrée : {' '.join(map(str, file_traitement))}")
+
+    # Vérification que toutes les tâches ont été traitées
+    if traitees == len(sommets):
+        print("-> Il n’y a pas de circuit")
+        return False  # Aucun cycle détecté
+    else:
+        print("-> Il y a un circuit")
+        return True  # Présence d'un cycle
