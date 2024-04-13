@@ -57,7 +57,7 @@ def afficher_tableau_contraintes(tasks):
     print(table)
 
 
-def creer_matrice(tasks):
+def afficher_matrice(tasks):
     print("Matrice de valeurs: ")
     # Calculer le nombre total de sommets
     sommets_count = len(tasks) + 2  # Inclut α et ω
@@ -123,4 +123,3 @@ def verifier_cycle(tasks):
         return False, "Le graphe contient des arcs à valeur négative"
 
     return True, "Le graphe ne contient aucun cycle"
-
