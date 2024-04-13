@@ -17,12 +17,12 @@ while True:
     print("Etape 3: Verification des propriétés d'ordonnancement")
     if not(verifier_cycle(tasks)):
         if not(verifier_arcs_negatifs(tasks)):
-            print("c ok")
+            print("Les propriétés sont verifiées !")
         else:
-            print("non")
+            print("Les propriétés ne sont pas verifiées")
     else:
         verifier_arcs_negatifs(tasks)
-        print("non")
+        print("Les propriétés ne sont pas verifiées")
 
 
 
