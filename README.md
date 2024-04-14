@@ -1,5 +1,12 @@
 # Scheduling Graph (Ordonnancement)
 
+## Installation des dépendances
+
+Pour installer les dépendances nécessaires pour ce projet, exécutez la commande suivante dans votre terminal :
+
+```bash
+pip install -r requirements.txt
+```
 
 ## Description
 Ce projet implique le développement d'un programme en Python pour lire et traiter des tableaux de contraintes, construire et vérifier un graphe d'ordonnancement, et enfin calculer et afficher le calendrier d'exécution des tâches et les chemins critiques.
