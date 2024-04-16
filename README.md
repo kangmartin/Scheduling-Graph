@@ -1,18 +1,26 @@
-# Scheduling Graph (Ordonnancement)
+# Scheduling Graph
 
-## Installation des dépendances
+## Description
+Modelisation d'un graph d'ordonnancement en langage Python.
+
+## Fonctionnalités
+- ✅ Lecture de Tableaux de Contraintes
+- ✅ Construction de Graphes (affichage de la matrice de valeurs)
+- ✅ Vérification de Graphes (détection de circuits et d'arcs négatifs)
+
+## TO-DO
+- ⏳ Calculer les rangs de tous les sommets du graphe
+- ⏳ Calculer le calendrier au plus tôt, au plus tard et les marges
+- ⏳ Afficher les chemins critiques
+- ⏳ Exportation des résultats dans un fichier `.txt`
+
+## Installation et lancement
 
 Pour installer les dépendances nécessaires pour ce projet, exécutez la commande suivante dans votre terminal :
 
 ```bash
 pip install -r requirements.txt
 ```
+Le lancement du programme se fait en exécutant le fichier `main.py`.
 
-## Description
-Ce projet implique le développement d'un programme en Python pour lire et traiter des tableaux de contraintes, construire et vérifier un graphe d'ordonnancement, et enfin calculer et afficher le calendrier d'exécution des tâches et les chemins critiques.
-
-## Fonctionnalités
-- **Lecture de Tableaux de Contraintes** : Importation depuis un fichier `.txt` et stockage en mémoire.
-- **Construction de Graphes** : Représentation sous forme de matrice après la lecture du tableau.
-- **Vérification de Graphes** : Assure qu'il n'y a pas de circuits ni d'arcs à valeur négative.
-- **Calcul de Calendriers** : Détermination des calendriers au plus tôt et au plus tard, ainsi que des marges et des chemins critiques.
+La liste des fichiers de test sont dans le dossier `FichiersTest`, chaque fichier est numeroté.
