@@ -1,6 +1,7 @@
 from prettytable import PrettyTable
 import collections
 
+
 def lire_taches_fichier(filename):
     tasks = []
     with open(filename, 'r') as file:
@@ -45,7 +46,7 @@ def calcul_arc(tasks):
 def afficher_tableau_contraintes(tasks):
     table = PrettyTable()
     table.field_names = ["Tâche", "Durée", "Contraintes"]
-    print("Le tableau de contrainte contient:\n-",calcul_sommets(tasks),"sommets","\n-",calcul_arc(tasks),"arcs")
+    print("Le tableau de contrainte contient:\n-", calcul_sommets(tasks), "sommets", "\n-", calcul_arc(tasks), "arcs")
     for task_id, duration, constraints in tasks:
         # Convertir les contraintes en chaîne de caractères ou laisser vide si pas de contraintes
         constraints_str = ', '.join(str(c) for c in constraints) if constraints else ""
@@ -73,67 +74,21 @@ def afficher_matrice(tasks):
         for pred in predecessors:
             # Arcs depuis les prédécesseurs vers la tâche actuelle
             matrice[pred][task_id] = tasks[pred - 1][1]  # duration of the predecessor
-
     # Ajouter les arcs vers ω
     all_tasks = set(task[0] for task in tasks)
     tasks_with_predecessors = set(pred for task in tasks for pred in task[2])
     tasks_without_successors = all_tasks - tasks_with_predecessors
     for task_id in tasks_without_successors:
         matrice[task_id][omega] = tasks[task_id - 1][1]  # duration of the task
-
+    print(matrice)
     table = PrettyTable()
     table.field_names = [" "] + [str(i) for i in range(sommets_count)]
     for i in range(sommets_count):
         table.add_row([str(i)] + matrice[i])
 
     print(table)
+    return matrice
 
-def verifier_cycle(taches):
-
-    # Construction du graphe d'adjacence et du compteur de prédécesseurs
-    graphe = collections.defaultdict(list)
-    predecesseurs = collections.Counter()
-
-    # Initialisation du graphe et du compteur
-    for tache, _, preds in taches:
-        for pred in preds:
-            graphe[pred].append(tache)
-        predecesseurs[tache] += len(preds)
-
-    # Obtenir tous les sommets (tâches)
-    sommets = set(predecesseurs.keys()).union(set(graphe.keys()))
-
-    # Initialisation de la file de traitement avec les tâches sans prédécesseur
-    file_traitement = [tache for tache in sommets if predecesseurs[tache] == 0]
-    print(f"Points d’entrée : {' '.join(map(str, file_traitement)) if file_traitement else 'Aucun'}")
-
-    traitees = 0
-
-    # Processus de suppression des points d'entrée (tâches sans prédécesseurs)
-    while file_traitement:
-        print("Suppression des points d’entrée")
-        next_file = []
-        while file_traitement:
-            tache = file_traitement.pop(0)
-            traitees += 1
-            for suivant in graphe[tache]:
-                predecesseurs[suivant] -= 1
-                if predecesseurs[suivant] == 0:
-                    next_file.append(suivant)
-
-        file_traitement = next_file
-        restants = set(sommets) - set(tache for tache, count in predecesseurs.items() if count == 0)
-        print(f"Sommets restant : {' '.join(map(str, restants)) if restants else 'Aucun'}")
-        if file_traitement:
-            print(f"Points d’entrée : {' '.join(map(str, file_traitement))}")
-
-    # Vérification que toutes les tâches ont été traitées
-    if traitees == len(sommets):
-        print("-> Il n’y a pas de circuit")
-        return False  # Aucun cycle détecté
-    else:
-        print("-> Il y a un circuit")
-        return True  # Présence d'un cycle
 
 def verifier_arcs_negatifs(taches):
     for _, duration, _ in taches:
@@ -142,3 +97,50 @@ def verifier_arcs_negatifs(taches):
             return True  # Indique la présence d'un arc négatif
     print("Il n’y a pas d’arcs négatifs.")
     return False  # Aucun arc négatif détecté
+
+
+def verifier_circuit(matrice):
+    points_entree = [0]
+    sommets_restants = []
+    for i in range(len(matrice)):
+        sommets_restants.append(i)
+    print("Points d'entrée: 0")
+    print("Suppression des points d'entrée")
+    for val in points_entree:
+        if val in sommets_restants:
+            sommets_restants.remove(val)
+    print("Sommets restants:", sommets_restants)
+    points_entree = []
+    for i in range(len(matrice[0])):
+        if not matrice[0][i] == "*":
+            points_entree.append(i)
+
+    while True:
+        if not points_entree:
+            print("Il y a un cycle")
+            return True
+        print("Points d'entrée:", points_entree)
+        print("Suppression des points d'entrée")
+        for val in points_entree:
+            if val not in sommets_restants:  # vérifier si le point est dans sommets_restants
+                print("Il y a un cycle")
+                return True
+            sommets_restants.remove(val)
+        print("Sommets restant:", sommets_restants)
+
+        if not sommets_restants:  # vérifier si sommets_restants est vide
+            print("Il y a pas de cycle")
+            return False
+
+        for j in range(len(matrice[0])):
+            for i in range(len(matrice)):
+                if i in points_entree:  # vérifier si l'index de la ligne est égal à val
+                    matrice[i][j] = "*"
+
+        points_entree = []
+        for j in range(1, len(matrice[0])):  # itérer sur chaque colonne
+            if all(matrice[i][j] == '*' for i in range(len(matrice))):  # vérifier si tous les éléments sont '*'
+                points_entree.append(j)  # ajouter l'indice de la colonne à points_entree
+        for j in points_entree:
+            for i in range(len(matrice)):
+                matrice[i][j] = 'X'
