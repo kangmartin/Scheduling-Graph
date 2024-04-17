@@ -11,19 +11,19 @@ while True:
 
     print("\n===========================================================\n\n")
     print("Etape 2: Affichage de la matrice de valeurs")
-    afficher_matrice(tasks)
+    matrice = afficher_matrice(tasks)
 
     print("\n===========================================================\n\n")
     print("Etape 3: Verification des propriétés d'ordonnancement")
-    if not(verifier_cycle(tasks)):
+    if not(verifier_circuit(matrice)):
         if not(verifier_arcs_negatifs(tasks)):
             print("Les propriétés sont verifiées !")
+
         else:
-            print("Les propriétés ne sont pas verifiées")
+            print("Les propriétés ne sont pas verifiées\nProgramme terminé")
     else:
         verifier_arcs_negatifs(tasks)
-        print("Les propriétés ne sont pas verifiées")
-
+        print("Les propriétés ne sont pas verifiées\nProgramme terminé")
 
 
 
