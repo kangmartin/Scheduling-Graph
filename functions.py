@@ -80,7 +80,6 @@ def afficher_matrice(tasks):
     tasks_without_successors = all_tasks - tasks_with_predecessors
     for task_id in tasks_without_successors:
         matrice[task_id][omega] = tasks[task_id - 1][1]  # duration of the task
-    print(matrice)
     table = PrettyTable()
     table.field_names = [" "] + [str(i) for i in range(sommets_count)]
     for i in range(sommets_count):
@@ -93,9 +92,9 @@ def afficher_matrice(tasks):
 def verifier_arcs_negatifs(taches):
     for _, duration, _ in taches:
         if duration < 0:
-            print("Il y a un arc négatif.")
+            print("-> Il y a un arc négatif.")
             return True  # Indique la présence d'un arc négatif
-    print("Il n’y a pas d’arcs négatifs.")
+    print("-> Il n’y a pas d’arcs négatifs.")
     return False  # Aucun arc négatif détecté
 
 
@@ -104,6 +103,7 @@ def verifier_circuit(matrice):
     sommets_restants = []
     for i in range(len(matrice)):
         sommets_restants.append(i)
+    print("** Détection de circuit\n** Méthode d’élimination des points d’entrée\n")
     print("Points d'entrée: 0")
     print("Suppression des points d'entrée")
     for val in points_entree:
@@ -117,19 +117,19 @@ def verifier_circuit(matrice):
 
     while True:
         if not points_entree:
-            print("Il y a un cycle")
+            print("-> Il y a un circuit\n")
             return True
         print("Points d'entrée:", points_entree)
         print("Suppression des points d'entrée")
         for val in points_entree:
             if val not in sommets_restants:  # vérifier si le point est dans sommets_restants
-                print("Il y a un cycle")
+                print("-> Il y a un circuit")
                 return True
             sommets_restants.remove(val)
         print("Sommets restant:", sommets_restants)
 
         if not sommets_restants:  # vérifier si sommets_restants est vide
-            print("Il y a pas de cycle")
+            print("-> Il n'y a pas de circuit")
             return False
 
         for j in range(len(matrice[0])):
@@ -222,7 +222,19 @@ def calculer_dates(tasks, rangs):
 
     return debut_plus_tot, debut_plus_tard
 
+def afficher_dates(debut_plus_tot, debut_plus_tard):
+    # Créer une instance de PrettyTable
+    table = PrettyTable()
 
+    # Définir les en-têtes de colonnes
+    table.field_names = ["Tâche", "Début au plus tôt", "Début au plus tard"]
+
+    # Parcourir les tâches et ajouter les dates au tableau
+    for task_id in sorted(debut_plus_tot.keys()):
+        table.add_row([f"Tâche {task_id}", debut_plus_tot[task_id], debut_plus_tard[task_id]])
+
+    # Afficher le tableau
+    print(table)
 
 def calculer_marges(debut_plus_tot, debut_plus_tard):
     marges = {}
@@ -258,3 +270,4 @@ def afficher_chemin_critique(marges, rangs):
     print("\nChemin Critique:")
     for task_id in chemin_critique_sorted: # Afficher les tâches du chemin critique
         print(f"Tâche {task_id}", end=", ")
+    print("\n")
