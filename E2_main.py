@@ -1,8 +1,8 @@
-from functions import *
+from E2_functions import *
 
 while True:
     choix = input("\nVeuillez entrer le numéro du test: ")
-    tasks = lire_taches_fichier(f"FichiersTest/{choix}.txt")
+    tasks = lire_taches_fichier(f"FichiersTest/E2_{choix}.txt")
 
     print("===================================================================")
     print("\nEtape 1: Lecture du tableau de contrainte\n")
