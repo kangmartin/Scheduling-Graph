@@ -18,6 +18,6 @@ Pour installer les dépendances nécessaires pour ce projet, exécutez la comman
 ```bash
 pip install -r requirements.txt
 ```
-Le lancement du programme se fait en exécutant le fichier `main.py`.
+Le lancement du programme se fait en exécutant le fichier `E2_main.py`.
 
 La liste des fichiers de test sont dans le dossier `FichiersTest`, chaque fichier est numeroté.
