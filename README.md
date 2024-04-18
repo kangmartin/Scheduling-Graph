@@ -7,11 +7,11 @@ Modelisation d'un graph d'ordonnancement en langage Python.
 - ✅ Lecture de Tableaux de Contraintes
 - ✅ Construction de Graphes (affichage de la matrice de valeurs)
 - ✅ Vérification de Graphes (détection de circuits et d'arcs négatifs)
+- ✅ Calculer les rangs de tous les sommets du graphe
+- ✅ Calculer le calendrier au plus tôt, au plus tard et les marges
+- ✅ Afficher les chemins critiques
 
 ## TO-DO
-- ⏳ Calculer les rangs de tous les sommets du graphe
-- ⏳ Calculer le calendrier au plus tôt, au plus tard et les marges
-- ⏳ Afficher les chemins critiques
 - ⏳ Exportation des résultats dans un fichier `.txt`
 
 ## Installation et lancement
