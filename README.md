@@ -11,9 +11,6 @@ Modelisation d'un graph d'ordonnancement en langage Python.
 - ✅ Calculer le calendrier au plus tôt, au plus tard et les marges
 - ✅ Afficher les chemins critiques
 
-## TO-DO
-- ⏳ Exportation des résultats dans un fichier `.txt`
-
 ## Installation et lancement
 
 Pour installer les dépendances nécessaires pour ce projet, exécutez la commande suivante dans votre terminal :
