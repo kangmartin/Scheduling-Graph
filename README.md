@@ -10,8 +10,8 @@ Modelisation d'un graph d'ordonnancement en langage Python.
 - ✅ Rangs de tous les sommets du graphe
 - ✅ Calendrier au plus tôt, au plus tard et les marges
 
-## En cours de développement
-- ⏳ Chemins critiques
+## À corriger
+- 🚧 Chemins critiques (N'affiche que le premier chelin même quand il y en a plusieurs)
 
 ## Installation et lancement
 
