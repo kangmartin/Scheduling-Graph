@@ -11,7 +11,7 @@ Modelisation d'un graph d'ordonnancement en langage Python.
 - ✅ Calendrier au plus tôt, au plus tard et les marges
 
 ## À corriger
-- 🚧 Chemins critiques (N'affiche que le premier chelin même quand il y en a plusieurs)
+- 🚧 Chemins critiques (Cela affiche que le premier chemin même quand il y en a plusieurs)
 
 ## Installation et lancement
 
