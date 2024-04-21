@@ -9,9 +9,7 @@ Modelisation d'un graph d'ordonnancement en langage Python.
 - ✅ Vérification de Graphes (détection de circuits et d'arcs négatifs)
 - ✅ Rangs de tous les sommets du graphe
 - ✅ Calendrier au plus tôt, au plus tard et les marges
-
-## À corriger
-- 🚧 Chemins critiques (Cela affiche que le premier chemin même quand il y en a plusieurs)
+- ✅ Chemins critiques
 
 ## Installation et lancement
 
