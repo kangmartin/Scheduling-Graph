@@ -4,12 +4,12 @@
 Modelisation d'un graph d'ordonnancement en langage Python.
 
 ## Fonctionnalités
-- ✅ Lecture de Tableaux de Contraintes
-- ✅ Construction de Graphes (affichage de la matrice de valeurs)
-- ✅ Vérification de Graphes (détection de circuits et d'arcs négatifs)
-- ✅ Rangs de tous les sommets du graphe
-- ✅ Calendrier au plus tôt, au plus tard et les marges
-- ✅ Chemins critiques
+- ✅ **Lecture de Tableaux de Contraintes**
+- ✅ **Construction de Graphes** (affichage de la matrice de valeurs)
+- ✅ **Vérification de Graphes** (détection de circuits et d'arcs négatifs)
+- ✅ **Rangs de tous les sommets du graphe**
+- ✅ **Calendrier au plus tôt, au plus tard et les marges**
+- ✅ **Chemins critiques**
 
 ## Installation et lancement
 
