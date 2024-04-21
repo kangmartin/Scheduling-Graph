@@ -209,16 +209,16 @@ def calculer_dates(tasks, rangs):
 
     # Calcul des dates au plus tard en commençant par Omega
     debut_plus_tard[omega] = debut_plus_tot[omega]
-    for task_id, duration, _ in sorted_tasks[::-1]: # Parcours inversé des tâches pour Omega à α
-        successors = [succ for succ, _, preds in tasks if task_id in preds] # Successeurs de la tâche
+    for task_id, duration, _ in sorted_tasks[::-1]:
+        successors = [succ for succ, _, preds in tasks if task_id in preds]
         if not successors:
             # Si pas de successeurs et pas Omega, elle doit finir avant Omega
             if task_id != omega:
-                debut_plus_tard[task_id] = debut_plus_tard[omega] - duration # Fin avant Omega
+                debut_plus_tard[task_id] = debut_plus_tard[omega] - duration
         else:
             # Min des débuts des successeurs
-            min_succ_start = min(debut_plus_tard[succ] for succ in successors) # Min des débuts des successeurs
-            debut_plus_tard[task_id] = min_succ_start - duration # Fin avant le début du successeur
+            min_succ_start = min(debut_plus_tard[succ] for succ in successors)
+            debut_plus_tard[task_id] = min_succ_start - duration
 
     return debut_plus_tot, debut_plus_tard
 
@@ -241,10 +241,10 @@ def calculer_marges(debut_plus_tot, debut_plus_tard):
     # Trouver toutes les tâches
     all_tasks = set(debut_plus_tot.keys()).union(set(debut_plus_tard.keys())) # Rassembler les dates pour calculer les marges
     for task_id in all_tasks:
-        if task_id not in debut_plus_tot: # Si la tâche n'a pas de date au plus tôt
-            debut_plus_tot[task_id] = float('inf')   # Initialiser à l'infini
-        if task_id not in debut_plus_tard: # Si la tâche n'a pas de date au plus tard
-            debut_plus_tard[task_id] = debut_plus_tot[task_id]   # Initialiser à la date au plus tôt
+        if task_id not in debut_plus_tot:
+            debut_plus_tot[task_id] = float('inf')
+        if task_id not in debut_plus_tard:
+            debut_plus_tard[task_id] = debut_plus_tot[task_id]
 
         # Calculer la marge
         marges[task_id] = debut_plus_tard[task_id] - debut_plus_tot[task_id]
@@ -262,12 +262,12 @@ def afficher_marges_par_rang(marges, rangs):
 
 def afficher_chemin_critique(marges, rangs):
     # Identifier les tâches qui font partie du chemin critique
-    chemin_critique = [task_id for task_id, marge in marges.items() if marge == 0] # Tâches avec marge nulle
+    chemin_critique = [task_id for task_id, marge in marges.items() if marge == 0]
 
     # Trier les tâches du chemin critique par leurs rangs pour une présentation ordonnée
-    chemin_critique_sorted = sorted(chemin_critique, key=lambda x: rangs.get(x, float('inf'))) # Trier par rang
+    chemin_critique_sorted = sorted(chemin_critique, key=lambda x: rangs.get(x, float('inf')))
 
     print("\nChemin Critique:")
-    for task_id in chemin_critique_sorted: # Afficher les tâches du chemin critique
+    for task_id in chemin_critique_sorted:
         print(f"Tâche {task_id}", end=", ")
     print("\n")
