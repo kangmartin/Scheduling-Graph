@@ -40,5 +40,5 @@ while True:
         afficher_chemin_critique(marges, rangs)
     else:
         print("\n===================================================================")
-        print("Il n'est pas possible d'avoir un ordonnancement, fin du programme.")
+        print("Les proprités ne sont pas verifiées (circuits et/ou arcs negatifs), fin du programme.")
     print("===================================================================")
