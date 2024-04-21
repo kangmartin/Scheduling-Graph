@@ -1,0 +1,149 @@
+Veuillez entrer le numéro du test: 9
+===================================================================
+
+Etape 1: Lecture du tableau de contrainte
+
+Le tableau de contrainte contient:
+- 12 sommets
+- 19 arcs
+
+Tableau de contraintes:
++----------+-------+---------------+
+|  Tâche   | Durée |  Contraintes  |
++----------+-------+---------------+
+| Tâche 1  |   1   | [4, 5, 8, 10] |
+| Tâche 2  |   2   |      [7]      |
+| Tâche 3  |   3   |    [6, 10]    |
+| Tâche 4  |   4   |       []      |
+| Tâche 5  |   5   |      [4]      |
+| Tâche 6  |   6   |       []      |
+| Tâche 7  |   7   |       []      |
+| Tâche 8  |   8   |     [5, 7]    |
+| Tâche 9  |   9   |  [1, 2, 3, 8] |
+| Tâche 10 |   10  |       []      |
++----------+-------+---------------+
+
+===================================================================
+
+Etape 2: Affichage de la matrice de valeurs
+
+Matrice de valeurs:
++----+---+----+---+----+---+---+---+---+---+---+----+----+
+|    | 0 | 1  | 2 | 3  | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 |
++----+---+----+---+----+---+---+---+---+---+---+----+----+
+| 0  | * | *  | * | *  | 0 | * | 0 | 0 | * | * | 0  | *  |
+| 1  | * | *  | * | *  | * | * | * | * | * | 1 | *  | *  |
+| 2  | * | *  | * | *  | * | * | * | * | * | 2 | *  | *  |
+| 3  | * | *  | * | *  | * | * | * | * | * | 3 | *  | *  |
+| 4  | * | 4  | * | *  | * | 4 | * | * | * | * | *  | *  |
+| 5  | * | 5  | * | *  | * | * | * | * | 5 | * | *  | *  |
+| 6  | * | *  | * | 6  | * | * | * | * | * | * | *  | *  |
+| 7  | * | *  | 7 | *  | * | * | * | * | 7 | * | *  | *  |
+| 8  | * | 8  | * | *  | * | * | * | * | * | 8 | *  | *  |
+| 9  | * | *  | * | *  | * | * | * | * | * | * | *  | 9  |
+| 10 | * | 10 | * | 10 | * | * | * | * | * | * | *  | *  |
+| 11 | * | *  | * | *  | * | * | * | * | * | * | *  | *  |
++----+---+----+---+----+---+---+---+---+---+---+----+----+
+
+===================================================================
+
+Etape 3: Verification des propriétés (pas de circuits et pas d'arcs)
+
+** Détection de circuit
+** Méthode d’élimination des points d’entrée
+
+Points d'entrée: 0
+Suppression des points d'entrée
+Sommets restants: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+Points d'entrée: [4, 6, 7, 10]
+Suppression des points d'entrée
+Sommets restant: [1, 2, 3, 5, 8, 9, 11]
+Points d'entrée: [2, 3, 5]
+Suppression des points d'entrée
+Sommets restant: [1, 8, 9, 11]
+Points d'entrée: [8]
+Suppression des points d'entrée
+Sommets restant: [1, 9, 11]
+Points d'entrée: [1]
+Suppression des points d'entrée
+Sommets restant: [9, 11]
+Points d'entrée: [9]
+Suppression des points d'entrée
+Sommets restant: [11]
+Points d'entrée: [11]
+Suppression des points d'entrée
+Sommets restant: []
+-> Il n'y a pas de circuit
+-> Il n’y a pas d’arcs négatifs.
+
+===================================================================
+
+Etape 4: Calcul des rangs des tâches
+
+Tâche 0: Rang 0
+Tâche 1: Rang 4
+Tâche 2: Rang 2
+Tâche 3: Rang 2
+Tâche 4: Rang 1
+Tâche 5: Rang 2
+Tâche 6: Rang 1
+Tâche 7: Rang 1
+Tâche 8: Rang 3
+Tâche 9: Rang 5
+Tâche 10: Rang 1
+Tâche 11: Rang 6
+
+===================================================================
+
+Etape 5: Calcul des dates au plus tôt et au plus tard et des marges
+
+Dates au plus tôt:
+Tâche 0: 0
+Tâche 4: 0
+Tâche 6: 0
+Tâche 7: 0
+Tâche 10: 0
+Tâche 2: 7
+Tâche 3: 10
+Tâche 5: 4
+Tâche 8: 9
+Tâche 1: 17
+Tâche 9: 18
+Tâche 11: 27
+
+Dates au plus tard:
+Tâche 11: 27
+Tâche 9: 18
+Tâche 1: 17
+Tâche 8: 9
+Tâche 5: 4
+Tâche 3: 15
+Tâche 2: 16
+Tâche 10: 5
+Tâche 7: 2
+Tâche 6: 9
+Tâche 4: 0
+Tâche 0: 0
+
+Marges:
+Tâche 0: Marge 0
+Tâche 4: Marge 0
+Tâche 6: Marge 9
+Tâche 7: Marge 2
+Tâche 10: Marge 5
+Tâche 2: Marge 9
+Tâche 3: Marge 5
+Tâche 5: Marge 0
+Tâche 8: Marge 0
+Tâche 1: Marge 0
+Tâche 9: Marge 0
+Tâche 11: Marge 0
+
+===================================================================
+
+Etape 6: Calcul et affichage des chemins critiques:
+
+Chemin Critique:
+Tâche 0, Tâche 4, Tâche 5, Tâche 8, Tâche 1, Tâche 9, Tâche 11,
+
+===================================================================

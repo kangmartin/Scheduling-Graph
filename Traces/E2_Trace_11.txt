@@ -1,0 +1,143 @@
+Veuillez entrer le numéro du test: 11
+===================================================================
+
+Etape 1: Lecture du tableau de contrainte
+
+Le tableau de contrainte contient:
+- 10 sommets
+- 16 arcs
+
+Tableau de contraintes:
++---------+-------+--------------+
+|  Tâche  | Durée | Contraintes  |
++---------+-------+--------------+
+| Tâche 1 |   1   |      []      |
+| Tâche 2 |   1   |    [1, 4]    |
+| Tâche 3 |   4   |     [2]      |
+| Tâche 4 |   2   |    [1, 5]    |
+| Tâche 5 |   5   |     [1]      |
+| Tâche 6 |   6   |    [4, 5]    |
+| Tâche 7 |   3   |    [3, 5]    |
+| Tâche 8 |   0   | [2, 4, 6, 7] |
++---------+-------+--------------+
+
+===================================================================
+
+Etape 2: Affichage de la matrice de valeurs
+
+Matrice de valeurs:
++---+---+---+---+---+---+---+---+---+---+---+
+|   | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
++---+---+---+---+---+---+---+---+---+---+---+
+| 0 | * | 0 | * | * | * | * | * | * | * | * |
+| 1 | * | * | 1 | * | 1 | 1 | * | * | * | * |
+| 2 | * | * | * | 1 | * | * | * | * | 1 | * |
+| 3 | * | * | * | * | * | * | * | 4 | * | * |
+| 4 | * | * | 2 | * | * | * | 2 | * | 2 | * |
+| 5 | * | * | * | * | 5 | * | 5 | 5 | * | * |
+| 6 | * | * | * | * | * | * | * | * | 6 | * |
+| 7 | * | * | * | * | * | * | * | * | 3 | * |
+| 8 | * | * | * | * | * | * | * | * | * | 0 |
+| 9 | * | * | * | * | * | * | * | * | * | * |
++---+---+---+---+---+---+---+---+---+---+---+
+
+===================================================================
+
+Etape 3: Verification des propriétés (pas de circuits et pas d'arcs)
+
+** Détection de circuit
+** Méthode d’élimination des points d’entrée
+
+Points d'entrée: 0
+Suppression des points d'entrée
+Sommets restants: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+Points d'entrée: [1]
+Suppression des points d'entrée
+Sommets restant: [2, 3, 4, 5, 6, 7, 8, 9]
+Points d'entrée: [5]
+Suppression des points d'entrée
+Sommets restant: [2, 3, 4, 6, 7, 8, 9]
+Points d'entrée: [4]
+Suppression des points d'entrée
+Sommets restant: [2, 3, 6, 7, 8, 9]
+Points d'entrée: [2, 6]
+Suppression des points d'entrée
+Sommets restant: [3, 7, 8, 9]
+Points d'entrée: [3]
+Suppression des points d'entrée
+Sommets restant: [7, 8, 9]
+Points d'entrée: [7]
+Suppression des points d'entrée
+Sommets restant: [8, 9]
+Points d'entrée: [8]
+Suppression des points d'entrée
+Sommets restant: [9]
+Points d'entrée: [9]
+Suppression des points d'entrée
+Sommets restant: []
+-> Il n'y a pas de circuit
+-> Il n’y a pas d’arcs négatifs.
+
+===================================================================
+
+Etape 4: Calcul des rangs des tâches
+
+Tâche 0: Rang 0
+Tâche 1: Rang 1
+Tâche 2: Rang 4
+Tâche 3: Rang 5
+Tâche 4: Rang 3
+Tâche 5: Rang 2
+Tâche 6: Rang 4
+Tâche 7: Rang 6
+Tâche 8: Rang 7
+Tâche 9: Rang 8
+
+===================================================================
+
+Etape 5: Calcul des dates au plus tôt et au plus tard et des marges
+
+Dates au plus tôt:
+Tâche 0: 0
+Tâche 1: 0
+Tâche 5: 1
+Tâche 4: 6
+Tâche 2: 8
+Tâche 6: 8
+Tâche 3: 9
+Tâche 7: 13
+Tâche 8: 16
+Tâche 9: 16
+
+Dates au plus tard:
+Tâche 9: 16
+Tâche 8: 16
+Tâche 7: 13
+Tâche 3: 9
+Tâche 6: 10
+Tâche 2: 8
+Tâche 4: 6
+Tâche 5: 1
+Tâche 1: 0
+Tâche 0: 0
+
+Marges:
+Tâche 0: Marge 0
+Tâche 1: Marge 0
+Tâche 5: Marge 0
+Tâche 4: Marge 0
+Tâche 2: Marge 0
+Tâche 6: Marge 2
+Tâche 3: Marge 0
+Tâche 7: Marge 0
+Tâche 8: Marge 0
+Tâche 9: Marge 0
+
+===================================================================
+
+Etape 6: Calcul et affichage des chemins critiques:
+
+Chemin Critique:
+Tâche 0, Tâche 1, Tâche 5, Tâche 4, Tâche 2, Tâche 3, Tâche 7, Tâche 8, Tâche 9,
+
+===================================================================
