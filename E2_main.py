@@ -29,11 +29,11 @@ while True:
 
         print("Dates au plus tôt:")
         for task_id, date in debut_plus_tot.items():
-            print(f"Tâche {task_id}: Début au plus tôt {date}")
+            print(f"Tâche {task_id}: {date}")
 
         print("\nDates au plus tard:")
         for task_id, date in debut_plus_tard.items():
-            print(f"Tâche {task_id}: Début au plus tard {date}")
+            print(f"Tâche {task_id}: {date}")
         afficher_marges_par_rang(marges, rangs)
         print("\n===================================================================")
         print("\nEtape 6: Calcul et affichage des chemins critiques:")
