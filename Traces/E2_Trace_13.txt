@@ -17,6 +17,16 @@ Tableau de contraintes:
 | Tâche 4 |   7   |     [3]     |
 +---------+-------+-------------+
 
+* Création du graphe d’ordonnancement :
+
+0 -> 1 = 0
+1 -> 2 = 9
+3 -> 2 = 4
+0 -> 3 = 0
+3 -> 4 = 4
+2 -> 5 = 2
+4 -> 5 = 7
+
 ===================================================================
 
 Etape 2: Affichage de la matrice de valeurs
